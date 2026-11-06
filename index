@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta name="theme-color" content="#08090b"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <title>Gauge Control</title>
+    <style>
+        :root {
+            --bg-color: #08090b;
+            --card-bg: #121418;
+            --accent-color: #00d2ff;
+            --text-color: #e0e6ed;
+            --text-muted: #8a99ad;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            border: 1px solid #1e232a;
+            border-radius: 16px;
+            padding: 32px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--text-color);
+            letter-spacing: 0.5px;
+        }
+
+        .gauge-display {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gauge-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .gauge-unit {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        input[type="range"] {
+            flex-grow: 1;
+            accent-color: var(--accent-color);
+            cursor: pointer;
+        }
+
+        .btn {
+            background-color: var(--accent-color);
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Gauge Control Dashboard</h1>
+
+        <div class="gauge-display">
+            <div>
+                <div class="gauge-value" id="gaugeVal">50</div>
+                <div class="gauge-unit">PSI</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="input-group">
+                <label for="slider">Adjustment</label>
+                <input type="range" id="slider" min="0" max="100" value="50" oninput="updateGauge(this.value)">
+            </div>
+            <button class="btn" onclick="resetGauge()">Reset Default</button>
+        </div>
+    </div>
+
+    <script>
+        function updateGauge(val) {
+            document.getElementById('gaugeVal').innerText = val;
+        }
+
+        function resetGauge() {
+            const defaultValue = 50;
+            document.getElementById('slider').value = defaultValue;
+            updateGauge(defaultValue);
+        }
+    </script>
+
+</body>
+</html>
